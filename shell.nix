@@ -17,5 +17,6 @@ pkgs.mkShell {
         charter
         latexmk;
     })
+    pkgs.poppler-utils
   ];
 }

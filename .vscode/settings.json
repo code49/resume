@@ -39,6 +39,16 @@
         "%DIR%/DavidChan_Resume.pdf"
       ],
       "env": {}
+    },
+    {
+      "name": "generate-preview",
+      "command": "nix-shell",
+      "args": [
+        "%WORKSPACE_FOLDER%/shell.nix",
+        "--run",
+        "pdftoppm -png -r 150 -singlefile %DIR%/DavidChan_Resume.pdf %DIR%/preview"
+      ],
+      "env": {}
     }
   ],
   "latex-workshop.latex.recipes": [
@@ -46,7 +56,8 @@
       "name": "latexmk 🔃",
       "tools": [
         "latexmk",
-        "copy-pdf"
+        "copy-pdf",
+        "generate-preview"
       ]
     },
     {
@@ -56,7 +67,8 @@
         "bibtex",
         "pdflatex",
         "pdflatex",
-        "copy-pdf"
+        "copy-pdf",
+        "generate-preview"
       ]
     }
   ],
