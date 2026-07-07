@@ -1,0 +1,371 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=2 cm, % seperation between body and page edge from the top
+    bottom=2 cm, % seperation between body and page edge from the bottom
+    left=2 cm, % seperation between body and page edge from the left
+    right=2 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging 
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{fontawesome5} % for using icons
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={DavidChan-Resume},
+    pdfauthor={David Chan},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \usepackage{lmodern}
+\fi
+
+\usepackage{charter}
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -1pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        label=-,
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 4.5 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{, \fill, 4.5 cm}
+    \begin{paracol}{3}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+\newcommand{\placelastupdatedtext}{% \placetextbox{<horizontal pos>}{<vertical pos>}{<stuff>}
+  \AddToShipoutPictureFG*{% Add <stuff> to current page foreground
+    \put(
+        \LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},
+        \LenToUnit{\paperheight-1.0 cm}
+    ){\vtop{{\null}\makebox[0pt][c]{
+        \small\color{gray}\textit{Last updated in September 2024}\hspace{\widthof{Last updated in September 2024}}
+    }}}%
+  }%
+}%
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+% new command for external links:
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{$|$}
+
+    \begin{header}
+        \fontsize{25 pt}{25 pt}\selectfont \textbf{David Le Chan}
+
+        \vspace{1 pt}
+
+        \normalsize
+        \mbox{Los Altos, CA}%
+        \kern 3.0 pt%
+        \AND%
+        \kern 3.0 pt%
+        \mbox{\hrefWithoutArrow{mailto:davidlechan@gmail.com}{davidlechan@gmail.com}}%
+        \kern 3.0 pt%
+        \AND%
+        \kern 3.0 pt%
+        \mbox{\hrefWithoutArrow{tel:+1-650-383-8954}{(650) 383-8954}} 
+        
+
+        % \mbox{\hrefWithoutArrow{https://davidlechan.dev/}{\underline{davidlechan.dev}}}%
+        % \kern 3.0 pt%
+        % \AND%/
+        % \kern 3.0 pt%
+        \mbox{\href{https://linkedin.com/in/david-le-chan}{\underline{linkedin.com/in/david-le-chan}}}%
+        \kern 3.0 pt%
+        \AND%
+        \kern 3.0 pt%
+        \mbox{\hrefWithoutArrow{https://github.com/code49}{\underline{github.com/code49}}}%
+    \end{header}
+
+    % \vspace{5 pt - 0.3 cm}
+
+    \section{Education}
+
+        \begin{twocolentry}
+            %{January 2025 - Present}
+            % {Class of 2027}
+            {Expected May 2027}
+            \textbf{M.S. in Electrical and Computer Engineering (ECE)} \\ 
+            % \href{https://www.cmu.edu/}{\underline{Carnegie Mellon University (CMU)}} | Pittsburgh, PA
+            \href{https://www.ece.cmu.edu/academics/ms-ece/index.html}{\underline{Carnegie Mellon University (CMU)}} | Pittsburgh, PA
+        \end{twocolentry}
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                % \item GPA: 3.73/4.00; \textit{4x College of Engineering Dean's List Recipient}
+                % \item \textbf{Coursework:} Digital IC Tapeout, Digital Integrated Circuit Design (SRAM), Innovation Strategy and Management
+                \item Digital Integrated Circuit Design (SRAMs), Innovation Strategy and Management
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+    
+        \begin{twocolentry}
+            % {August 2022 - Present}
+            % {Class of 2026}
+            {Expected May 2026}
+            \textbf{B.S. in Electrical and Computer Engineering (ECE)} \\ 
+            % \href{https://www.cmu.edu/}{\underline{Carnegie Mellon University (CMU)}} | Pittsburgh, PA
+            \href{https://www.ece.cmu.edu/academics/bs-in-ece/index.html}{\underline{Carnegie Mellon University (CMU)}} | Pittsburgh, PA
+        \end{twocolentry}
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item GPA: 3.8/4.0; \textit{5x College of Engineering Dean's List Recipient}
+                % \item \textbf{Coursework:} Digital IC Tapeout, Computer Architecture, Digital Design Verification, Microelectronic Circuits, Machine Learning, Computer Systems, Signal Analysis, Linear Algebra, Multivariable Calculus, Statistics
+                \item Digital IC Tapeout, Computer Architecture, Digital Design Verification, Microelectronic Circuits, Machine Learning, Computer Systems, Signal Analysis, Linear Algebra, Multivariable Calculus, Statistics
+            \end{highlights}
+        \end{onecolentry}
+
+    \section{Work Experience}
+
+        \begin{twocolentry} 
+            {May 2025 - August 2025}
+            \textbf{FPGA \& Electrical Engineering Intern} \\
+            \href{https://www.kla.com/}{\underline{KLA Corporation}, BBP Division} | Milpitas, CA
+        \end{twocolentry}
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Upgraded FPGA firmware for high-speed lossless image compression on KLA's flagship wafer inspection tool line
+                \item Implemented subsystems via Verilog and Vivado IP Integrator, verifying functionality through Questa simulation
+                \item Deployed designs on PCIe-based Alveo accelerator cards, performing place-and-route optimization and hardware-level validation to quantify performance and ensure reliability
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}
+            {May 2024 - Present}
+            \textbf{Undergraduate Research Assistant} \\
+            % \href{https://www.ece.cmu.edu/}{IO Harness Project, CMU ECE} | Pittsburgh, PA
+            IO Harness Project, CMU ECE | Pittsburgh, PA
+        \end{twocolentry}
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+
+                % \item Designing a standardized chip harness on TSMC’s 180nm node with Professors Ken Mai and Jim Bain to reduce infrastructure redevelopment work in CMU’s digital IC tapeout (18-725) class
+                \item Designing a standardized harness to reduce infrastructure redevelopment work for IC tapeouts; first prototype fabricated on TSMC 180\,nm under active testing
+                \item Architecting system features and writing SystemVerilog RTL for I2C, UART, and SPI communication blocks
+
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+
+        \begin{twocolentry}
+            {June 2022 - January 2024}
+            \textbf{Power Electronics \& Programming Intern} \\
+            \href{https://www.taumotors.com/}{\underline{Tau Motors}} | Redwood City, CA
+        \end{twocolentry}
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+
+                \item Prototyped power circuits for wound-field electric motors, including PCB layout, assembly, and bench testing
+                \item Developed custom Python-based inventory management software and systems to accelerate hardware iterations
+
+            \end{highlights}
+        \end{onecolentry}
+
+    % \section{Publications}
+        
+    %     \begin{samepage}
+    %         \begin{twocolentry}{
+    %             Jan 2004
+    %         }
+    %             \textbf{3D Finite Element Analysis of No-Insulation Coils}
+    %         \end{twocolentry}
+
+    %         \vspace{0.10 cm}
+            
+    %         \begin{onecolentry}
+    %             \mbox{Frodo Baggins}, \mbox{\textbf{\textit{John Doe}}}, \mbox{Samwise Gamgee}
+
+    %             \vspace{0.10 cm}
+                
+    %     \href{https://doi.org/10.1109/TASC.2023.3340648}{10.1109/TASC.2023.3340648}
+    %     \end{onecolentry}
+    %     \end{samepage}
+    
+    \section{Leadership and Projects}
+
+        \begin{twocolentry}
+            {January 2025 - Present}
+            \textbf{Head Teaching Assistant (TA), Introduction to ECE (18-100)} \\
+            % \textbf{Head Teaching Assistant, }\href{https://courses.ece.cmu.edu/18100}{\textbf{Introduction to ECE (18-100)}} \\
+            
+        \end{twocolentry}
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+
+                \item Leading a 40 TA team to foster an emotionally-safe environment where 180 first-year students can explore ECE, form lasting friendships, and develop strong engineering habits
+                \item Continuously redesigning lab curriculum, such as the AM Radio lab with PCB and soldering components, to give students hands-on experience with real hardware assembly and industry design workflows
+                \item Establishing automated Python scripts and feedback systems to streamline course operations, reducing administrative overhead and empowering TAs to focus on mentorship and teaching quality
+
+            \end{highlights}
+        \end{onecolentry}
+
+        \vspace{0.2 cm}
+        
+        \begin{twocolentry}
+            {January 2025}
+            \textbf{One-Instruction Flappy Bird }\href{https://github.com/jobitaki/JustOneFlappyBird}{\underline{(github.com/jobitaki/JustOneFlappyBird)}}
+        \end{twocolentry}
+        \vspace{0.10 cm}
+        \begin{onecolentry}
+            \begin{highlights}
+                \item Collaborated with a team to design a one-instruction (SUBLEQ) CPU to play the video game Flappy Bird
+                % \item Collaborated with a team to design a one-instruction (SUBLEQ) CPU to play the video game Flappy Bird, contributing to a successful project at CMU ECE’s Build18 hackathon
+                \item Implemented memory-mapped IO and VGA graphics features in SystemVerilog to target a Spartan7 FPGA
+            \end{highlights}
+        \end{onecolentry}
+
+
+        \vspace{0.2 cm}
+
+        % \begin{twocolentry}
+        %     {August 2023 - Present}
+        %     \href{https://tartanconnect.cmu.edu/cia/top/}{\textbf{Carnegie Involvement Association (CIA) Buggy}}
+        % \end{twocolentry}
+        % \vspace{0.10 cm}
+        % \begin{onecolentry}
+        %     \begin{highlights}
+        %         \item Managed over \$50k in club funds and coordinated with CMU alumni and financial officers
+        %         % \item Pusher and mechanic for buggy, CMU's annual unpowered vehicle race, as part of team CIA
+        %     \end{highlights}
+        % \end{onecolentry}
+    
+    \section{Skills}
+
+        % \vspace{0.2 cm}
+
+        \begin{onecolentry}
+            \begin{highlights}
+                % \item \textbf{Hardware:} SystemVerilog, VCS/Questa, Quartus/Vivado, TCL, Cadence (Virtuoso/Genus/Innovus), KiCAD/Fusion360
+                \item SystemVerilog, VCS/Questa, Quartus/Vivado, TCL, Cadence (Virtuoso/Genus/Innovus), KiCAD/Fusion360
+                \item Python (NumPy, Pandas, Scikit), Git, Bash, C/C++, MATLAB
+                % \item \textbf{Software:} Python (NumPy, Pandas, Scikit), Git, Bash, C/C++, MATLAB
+                % \item \textbf{Software:} Python (NumPy, Pandas, Scikit), Git, Bash scripts, C/C++, MATLAB, Rust, JavaScript, PHP, SQL
+            \end{highlights}
+        \end{onecolentry}
+
+        % \vspace{0.2 cm}
+
+        % \begin{onecolentry}
+        %     \textbf{Miscellaneous:} English (Native), Mandarin Chinese (Proficient), Git, LaTeX, Linux, MS Office
+        % \end{onecolentry}
+
+\end{document}

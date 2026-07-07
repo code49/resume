@@ -1,0 +1,64 @@
+{
+  "latex-workshop.latex.outDir": "%DIR%/build",
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "nix-shell",
+      "args": [
+        "%WORKSPACE_FOLDER%/shell.nix",
+        "--run",
+        "latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir=%OUTDIR% %DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "pdflatex",
+      "command": "nix-shell",
+      "args": [
+        "%WORKSPACE_FOLDER%/shell.nix",
+        "--run",
+        "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -outdir=%OUTDIR% %DOC%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "bibtex",
+      "command": "nix-shell",
+      "args": [
+        "%WORKSPACE_FOLDER%/shell.nix",
+        "--run",
+        "bibtex %DOCFILE%"
+      ],
+      "env": {}
+    },
+    {
+      "name": "copy-pdf",
+      "command": "cp",
+      "args": [
+        "%OUTDIR%/%DOCFILE%.pdf",
+        "%DIR%/"
+      ],
+      "env": {}
+    }
+  ],
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "latexmk 🔃",
+      "tools": [
+        "latexmk",
+        "copy-pdf"
+      ]
+    },
+    {
+      "name": "pdflatex ➞ bibtex ➞ pdflatex × 2",
+      "tools": [
+        "pdflatex",
+        "bibtex",
+        "pdflatex",
+        "pdflatex",
+        "copy-pdf"
+      ]
+    }
+  ],
+  "latex-workshop.view.pdf.viewer": "tab"
+}
