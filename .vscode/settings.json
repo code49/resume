@@ -36,7 +36,7 @@
       "command": "cp",
       "args": [
         "%OUTDIR%/%DOCFILE%.pdf",
-        "%DIR%/"
+        "%DIR%/DavidChan_Resume.pdf"
       ],
       "env": {}
     }
