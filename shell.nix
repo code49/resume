@@ -10,7 +10,6 @@ pkgs.mkShell {
         fontawesome5
         eso-pic
         bookmark
-        lastpage
         changepage
         paracol
         needspace
