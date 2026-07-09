@@ -1,2 +1,6 @@
-# Ignore VS Code LaTeX Workshop build directory
-build/
+# Ignore VS Code LaTeX Workshop build directory contents
+build/*
+
+# Unignore preview images for repository documentation
+!build/preview.png
+!build/preview_dark.png

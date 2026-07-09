@@ -14,7 +14,26 @@
 \usepackage{tabularx} % for making tables with fixed width columns
 \usepackage{array} % tabularx requires this
 \usepackage[dvipsnames]{xcolor} % for coloring text
-\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+
+% Conditional Dark Mode setup (can be overridden via command line: pdflatex "\def\darkmodeenabled{1}\newif\ifdarkmode\darkmodetrue\input{main.tex}")
+\ifdefined\darkmodeenabled
+\else
+    \expandafter\newif\csname ifdarkmode\endcsname
+    \darkmodefalse
+\fi
+
+\ifdarkmode
+    \definecolor{backgroundColor}{RGB}{20, 20, 20}      % Charcoal background
+    \definecolor{primaryColor}{RGB}{240, 240, 240}      % Soft white text
+    \definecolor{linkColor}{RGB}{240, 240, 240}         % Soft white for links
+    \definecolor{subtleColor}{RGB}{160, 160, 160}       % Light gray for secondary text
+\else
+    \definecolor{backgroundColor}{RGB}{255, 255, 255}  % White background
+    \definecolor{primaryColor}{RGB}{0, 0, 0}            % Black text
+    \definecolor{linkColor}{RGB}{0, 0, 0}               % Black for links
+    \definecolor{subtleColor}{RGB}{120, 120, 120}       % Gray for secondary text
+\fi
+
 \usepackage{enumitem} % for customizing lists
 \usepackage{fontawesome5} % for using icons
 \usepackage{amsmath} % for math
@@ -23,7 +42,7 @@
     pdfauthor={David Chan},
     pdfcreator={LaTeX with RenderCV},
     colorlinks=true,
-    urlcolor=primaryColor,
+    urlcolor=linkColor,
     pageanchor=false
 ]{hyperref} % for links, metadata and bookmarks
 \usepackage[pscoord]{eso-pic} % for floating text on the page
@@ -141,7 +160,7 @@
         \LenToUnit{\paperwidth-2 cm-0 cm+0.05cm},
         \LenToUnit{\paperheight-1.0 cm}
     ){\vtop{{\null}\makebox[0pt][c]{
-        \small\color{gray}\textit{Last updated in September 2024}\hspace{\widthof{Last updated in September 2024}}
+        \small\color{subtleColor}\textit{Last updated in September 2024}\hspace{\widthof{Last updated in September 2024}}
     }}}%
   }%
 }%
@@ -154,6 +173,8 @@
 %==================================================
 
 \begin{document}
+    \pagecolor{backgroundColor}
+    \color{primaryColor}
     \newcommand{\AND}{\unskip
         \cleaders\copy\ANDbox\hskip\wd\ANDbox
         \ignorespaces
@@ -178,9 +199,9 @@
         \kern 3.0 pt%
         \mbox{\hrefWithoutArrow{tel:+1-650-383-8954}{(650) 383-8954}} 
         
-        \mbox{\hrefWithoutArrow{https://davidlechan.dev/}{\underline{davidlechan.dev}}}%
-        \kern 3.0 pt%
-        \AND%/
+        % \mbox{\hrefWithoutArrow{https://davidlechan.dev/}{\underline{davidlechan.dev}}}%
+        % \kern 3.0 pt%
+        % \AND%/
         \kern 3.0 pt%
         \mbox{\href{https://linkedin.com/in/david-le-chan}{\underline{linkedin.com/in/david-le-chan}}}%
         \kern 3.0 pt%

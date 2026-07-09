@@ -17,7 +17,7 @@
       "args": [
         "%WORKSPACE_FOLDER%/shell.nix",
         "--run",
-        "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -outdir=%OUTDIR% %DOC%"
+        "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -output-directory=%OUTDIR% %DOC%"
       ],
       "env": {}
     },
@@ -46,7 +46,36 @@
       "args": [
         "%WORKSPACE_FOLDER%/shell.nix",
         "--run",
-        "pdftoppm -png -r 150 -singlefile %DIR%/DavidChan_Resume.pdf %DIR%/preview"
+        "pdftoppm -png -r 150 -singlefile %DIR%/DavidChan_Resume.pdf %DIR%/build/preview"
+      ],
+      "env": {}
+    },
+    {
+      "name": "pdflatex-dark",
+      "command": "nix-shell",
+      "args": [
+        "%WORKSPACE_FOLDER%/shell.nix",
+        "--run",
+        "pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -output-directory=%OUTDIR% -jobname=%DOCFILE%_Dark '\\def\\darkmodeenabled{1}\\newif\\ifdarkmode\\darkmodetrue\\input{%DOC%}'"
+      ],
+      "env": {}
+    },
+    {
+      "name": "copy-pdf-dark",
+      "command": "cp",
+      "args": [
+        "%OUTDIR%/%DOCFILE%_Dark.pdf",
+        "%DIR%/DavidChan_Resume_Dark.pdf"
+      ],
+      "env": {}
+    },
+    {
+      "name": "generate-preview-dark",
+      "command": "nix-shell",
+      "args": [
+        "%WORKSPACE_FOLDER%/shell.nix",
+        "--run",
+        "pdftoppm -png -r 150 -singlefile %DIR%/DavidChan_Resume_Dark.pdf %DIR%/build/preview_dark"
       ],
       "env": {}
     }
@@ -57,7 +86,10 @@
       "tools": [
         "latexmk",
         "copy-pdf",
-        "generate-preview"
+        "generate-preview",
+        "pdflatex-dark",
+        "copy-pdf-dark",
+        "generate-preview-dark"
       ]
     },
     {
