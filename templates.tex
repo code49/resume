@@ -1,0 +1,68 @@
+% ==========================================
+% LATEX CV ENTRY TEMPLATES
+% ==========================================
+
+% Archetype 1: Two-Line Header Entry (Education / Work Experience)
+% Use this for entries that need a title/role on the first line, 
+% and an organization/location on the second line.
+\begin{twocolentry}
+    {Month Year - Month Year}
+    {\textbf{Degree or Job Title} \\
+    \href{https://organization-url.com}{\underline{Institution or Company}} | Location}
+\end{twocolentry}
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Accomplishment bullet point describing impact and technologies used
+        \item Another accomplishment bullet point
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm} % Spacing between entries
+
+
+% Archetype 2: One-Line Header Entry (Projects / Leadership)
+% Use this for entries that only need a title on a single line (no organization line).
+\begin{twocolentry}
+    {Month Year - Month Year}
+    {\textbf{Project or Role Title} \\}
+\end{twocolentry}
+\vspace{0.10 cm}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Key project achievement, implementation details, or responsibilities
+        \item Another project highlight
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm} % Spacing between entries
+
+
+% Archetype 3: Skills Section (Single Column Highlights)
+\section{Skills}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Category 1: Item A, Item B, Item C
+        \item Category 2: Item D, Item E, Item F
+    \end{highlights}
+\end{onecolentry}
+
+
+% Archetype 4: Publications Entry (using samepage to prevent layout break)
+\section{Publications}
+
+\begin{samepage}
+    \begin{twocolentry}{
+        Month Year
+    }
+        \textbf{Title of the Published Paper or Article}
+    \end{twocolentry}
+    \vspace{0.10 cm}
+    \begin{onecolentry}
+        First Author, \textbf{\textit{Your Name}}, Third Author
+        \vspace{0.10 cm}
+        
+        \href{https://doi.org/10.1109/XXXX.XXXXXXX}{DOI Reference Link}
+    \end{onecolentry}
+\end{samepage}
