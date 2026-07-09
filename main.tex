@@ -3,8 +3,8 @@
 % Packages:
 \usepackage[
     ignoreheadfoot, % set margins without considering header and footer
-    top=2 cm, % seperation between body and page edge from the top
-    bottom=2 cm, % seperation between body and page edge from the bottom
+    top=1.6 cm, % seperation between body and page edge from the top
+    bottom=1.6 cm, % seperation between body and page edge from the bottom
     left=2 cm, % seperation between body and page edge from the left
     right=2 cm, % seperation between body and page edge from the right
     footskip=1.0 cm, % seperation between body and footer
@@ -275,9 +275,9 @@
         \begin{onecolentry}
             \begin{highlights}
 
-                \item Upgraded FPGA firmware for high-speed lossless image compression on KLA's flagship wafer inspection tool line
-                \item Implemented subsystems via Verilog and Vivado IP Integrator, verifying functionality through Questa simulation
-                \item Deployed designs on PCIe-based Alveo accelerator cards, performing place-and-route optimization and hardware-level validation to quantify performance and ensure reliability
+                \item Upgraded image compression FPGA firmware, achieving a 6.7\% throughput increase on flagship inspection tools
+                \item Designed Verilog pipelines for image segmentation and reconstruction, verifying functionality via Questa
+                \item Validated designs on Alveo PCIe cards, closing timing at 80MHz with 50\% more parallel processing engines
           
             \end{highlights}
         \end{onecolentry}
@@ -293,8 +293,9 @@
         \begin{onecolentry}
             \begin{highlights}
 
-                \item Designing a standardized harness to reduce infrastructure redevelopment work for IC tapeouts; first prototype fabricated on TSMC 180\,nm under active testing
-                \item Architecting system features and writing SystemVerilog RTL for I2C, UART, and SPI communication blocks
+                \item Designing a standardized research-chip harness to minimize infrastructure rework; testing a 180nm prototype
+                \item Authored and verified SystemVerilog RTL for UART, I2C, and SPI communication blocks
+                \item Streamlining an eFPGA-generation pipeline to serve as a device under test (DUT)
 
             \end{highlights}
         \end{onecolentry}
@@ -302,7 +303,7 @@
         \vspace{0.2 cm} %==================================================
 
         \begin{twocolentry}
-            {June 2022 - January 2024}
+            {May - August 2023}
             {\textbf{Power Electronics \& Programming Intern} \\
             \href{https://www.taumotors.com/}{\underline{Tau Motors}} | Redwood City, CA}
         \end{twocolentry}
@@ -310,8 +311,8 @@
         \begin{onecolentry}
             \begin{highlights}
 
-                \item Prototyped power circuits for wound-field electric motors, including PCB layout, assembly, and bench testing
-                \item Developed custom Python-based inventory management software and systems to accelerate hardware iterations
+                \item Independently designed and prototyped motor testbenches and PCBs, owning layout, assembly, and validation
+                \item Built Python inventory management tools from scratch to accelerate hardware testing cycles
 
             \end{highlights}
         \end{onecolentry}
