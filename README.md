@@ -37,7 +37,7 @@ If you are not using Nix/NixOS, you can compile the resume using your local TeX 
   ```bash
   latexmk -synctex=1 -interaction=nonstopmode -file-line-error -pdf -outdir=build main.tex && cp build/main.pdf DavidChan_Resume.pdf && pdftoppm -png -r 150 -singlefile DavidChan_Resume.pdf build/preview
   ```
-* **Dark Mode 🌙**:
+* **Dark Mode**:
   ```bash
   pdflatex -synctex=1 -interaction=nonstopmode -file-line-error -output-directory=build -jobname=main_Dark '\def\darkmodeenabled{1}\newif\ifdarkmode\darkmodetrue\input{main.tex}' && cp build/main_Dark.pdf DavidChan_Resume_Dark.pdf && pdftoppm -png -r 150 -singlefile DavidChan_Resume_Dark.pdf build/preview_dark
   ```
