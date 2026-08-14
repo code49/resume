@@ -1,3 +1,6 @@
+# Ignore directory containing temporary/working versions
+temp/*
+
 # Ignore VS Code LaTeX Workshop build directory contents
 build/*
 
